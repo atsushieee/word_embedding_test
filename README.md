@@ -27,4 +27,8 @@ $ python app.py preprocess
 
 
 ## License
-MIT
+The class is licensed under the [MIT License](https://opensource.org/licenses/MIT):
+
+## Author
+- Atsushi Tabata [@atsushieee](https://github.com/atsushieee)
+- Author Email  [atsushi.tabata1204@gmail.com](mailto:atsushi.tabata1204@gmail.com)
