@@ -67,17 +67,20 @@ class WordProcessing():
                     self.corpus.separate_paragraph_array(doc)
                 for paragraph_sentence in paragraph_sentence_list:
                     node = self.tagger.parseToNode(paragraph_sentence)
-                    paragraph_words = []
+                    paragraph_words = ''
+                    # paragraph_words = []
                     while node:
                         word = node.feature.split(",")[6]
                         # 日本語の表現だけを抽出
                         if re.search(r'[ぁ-んァ-ヶ一-龥]+', word):
-                            paragraph_words.append(word_stoi[word])
+                            paragraph_words += str(word_stoi[word]) + ', '
                         node = node.next
 
+                    # if len(paragraph_words) > 0:
                     if paragraph_words:
+                        paragraph_words = paragraph_words[:-2]
                         inserted_info.append((
-                            wiki_file, paragraph_sentence, str(paragraph_words)
+                            wiki_file, paragraph_sentence, paragraph_words
                         ))
 
                 # 文章情報のDB登録
@@ -91,7 +94,7 @@ def preprocess():
     wiki_word_processing = WordProcessing(wiki, wiki_files)
     wiki_words_frequency = wiki_word_processing.extract_words_fequency()
     # 単語情報のDB登録
-    db_model = DbModel(CONFIG['db_file_name'])
+    db_model = DbModel(CONFIG['db_file_name'], True)
     db_model.insert_records_words_table(wiki_words_frequency)
 
     words_info = db_model.select_all_records_words_table()

@@ -6,12 +6,14 @@ DB_ABSOLUTE_PATH = os.path.abspath(os.path.dirname(__file__))
 
 class DbModel:
     ''' Sqliteの処理を行うclass '''
-    def __init__(self, db_file):
+    def __init__(self, db_file, is_initial=False):
         self.db_file = DB_ABSOLUTE_PATH + '/' + db_file
-        if os.path.isfile(self.db_file):
+
+        if os.path.isfile(self.db_file) and is_initial:
             os.remove(self.db_file)
         self._init_process()
-        self._create_table()
+        if is_initial:
+            self._create_table()
 
     def _init_process(self):
         self.conn = sqlite3.connect(self.db_file)
@@ -33,6 +35,11 @@ class DbModel:
 
     def select_all_records_words_table(self):
         select_word_sql = 'SELECT * FROM words'
+        self.cur.execute(select_word_sql)
+        return self.cur.fetchall()
+
+    def select_all_records_sentences_table(self):
+        select_word_sql = 'SELECT * FROM sentences'
         self.cur.execute(select_word_sql)
         return self.cur.fetchall()
 

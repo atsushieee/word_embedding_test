@@ -22,8 +22,15 @@ $ cd app
 $ python app.py preprocess
 ```
 
+1. 以下のコマンドを入力し、skipgramモデルにより導出した、類似単語をコンソールに表示
+``` bash
+$ python app.py skipgram
+```
+
 ## Note
-- [Qiitaの投稿]()に、処理の説明を記載
+- Qiitaに、処理の説明を記載
+  1. [日本語版wikipediaのデータ取得と整形](https://qiita.com/atsushieee/items/7b64b605de7d1646bf41)
+  1. [テキストデータをNLPのコーパスとして活用するための事前処理](https://qiita.com/atsushieee/items/d002a27b8f1e270e28c8)
 
 
 ## License
