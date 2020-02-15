@@ -38,6 +38,11 @@ class DbModel:
         self.cur.execute(select_word_sql)
         return self.cur.fetchall()
 
+    def select_all_records_words_table_desc(self):
+        select_word_sql = 'SELECT * FROM words ORDER BY frequency DESC'
+        self.cur.execute(select_word_sql)
+        return self.cur.fetchall()
+
     def select_all_records_sentences_table(self):
         select_word_sql = 'SELECT * FROM sentences'
         self.cur.execute(select_word_sql)

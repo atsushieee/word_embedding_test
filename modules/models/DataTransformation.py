@@ -25,6 +25,15 @@ class DataTransformation:
             word2idx[word_info[1]] = word_info[0]
         return word2idx
 
+    def get_word2idx_limited(self, vocab_size=5000):
+        max_vocab_size = self.get_vocab_size()
+        if max_vocab_size < vocab_size:
+            print("exceed the vocabrary size of training data")
+            return None
+        self.words_info = self.db_model.select_all_records_words_table_desc()
+        selected_words = self.words_info[:vocab_size]
+        return selected_words
+
     def get_vocab_size(self):
         words_info = self.db_model.select_all_records_words_table()
         return len(words_info)
